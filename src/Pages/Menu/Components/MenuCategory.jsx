@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import Cover from "../../../Componentes/Cover/Cover";
 ;
 import Menu from "../../../Componentes/SectionTitle/Menu/Menu"
@@ -13,6 +14,10 @@ const MenuCategory = ({ items, title, img }) => {
                     items.map(item => <Menu key={item._id} item={item}></Menu>)
                 }
             </div>
+            {title && img && <> <Link to={`/order/${title}`}>
+                <button className="btn btn-wide btn-outline border-0 border-y-4 my-4">View More</button>
+            </Link></>}
+
         </div>
     );
 };
