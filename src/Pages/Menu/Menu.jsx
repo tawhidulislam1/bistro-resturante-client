@@ -1,8 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import Cover from "../../Componentes/Cover/Cover";
 import imageBg from "../../assets/menu/banner3.jpg"
-import PopularMenu from "../Home/Components/PopularMenu";
+import MenuCategory from "./Components/MenuCategory";
+import SectionTitle from "../../Componentes/SectionTitle/SectionTitle";
+import useMenu from "../../Hooks/useMenu";
 const Menu = () => {
+    const [menu] = useMenu()
+    const Offered = menu.filter(item => item.category === "offered");
     return (
         <div>
             <Helmet>
@@ -12,7 +16,8 @@ const Menu = () => {
                 image={imageBg}
                 title="Our Menu"
             ></Cover>
-            <PopularMenu></PopularMenu>
+            <SectionTitle subHeading="Don't Miss" heading="Todays Offer"></SectionTitle>
+            <MenuCategory items={Offered} ></MenuCategory>
 
         </div>
     );
