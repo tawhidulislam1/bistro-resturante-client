@@ -5,7 +5,7 @@ import NavBar from '../Pages/Shared/NavBar';
 
 const Layout = () => {
     const location = useLocation();
-    const noHeaderFooter = location.pathname.includes('login')
+    const noHeaderFooter = location.pathname.includes('login') || location.pathname.includes('register')
     return (
         <div className='max-w-screen-xl mx-auto'>
             {noHeaderFooter || <NavBar></NavBar>}
