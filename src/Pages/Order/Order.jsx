@@ -5,9 +5,18 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../Hooks/useMenu";
 import TabComponent from "./TabComponent";
+import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Order = () => {
-    const [tabindex, setTabindex] = useState(0);
+    <Helmet>
+        <title>Bistro Boss | Order</title>
+    </Helmet>
+    const categories = ["pizza", "dessert", "salad", "soup", "drinks"]
+    const { category } = useParams();
+    const initialIndex = categories.indexOf(category)
+    console.log(initialIndex);
+    const [tabindex, setTabindex] = useState(initialIndex);
     const [menu] = useMenu();
 
     const pizza = menu.filter(item => item.category === "pizza");
