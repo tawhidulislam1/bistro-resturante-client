@@ -1,21 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 const Login = () => {
+    const { signIn } = useContext(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log({ email, password });
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    title: "Login Successfully!",
+                    icon: "success",
+                    draggable: true
+                });
+            })
     }
-    const capthcaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
-    const validateCapthca = () => {
-        const user_capthca_value = capthcaRef.current.value;
+    const validateCapthca = (e) => {
+        const user_capthca_value = e.target.value;
         if (validateCaptcha(user_capthca_value) == true) {
             setDisabled(false)
         }
@@ -55,8 +66,7 @@ const Login = () => {
                             <label className="label">
                                 <LoadCanvasTemplate />
                             </label>
-                            <input ref={capthcaRef} type="text" name="capthca" placeholder="Please Type the capthca code" className="input input-bordered" required />
-                            <button className="btn-xs btn btn-outline" onClick={validateCapthca}>Validate</button>
+                            <input onBlur={validateCapthca} type="text" name="capthca" placeholder="Please Type the capthca code" className="input input-bordered" required />
 
                         </div>
                         <div className="form-control mt-6">
