@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 const Login = () => {
     const { signIn } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location?.state?.from?.pathname || "/"
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -20,6 +23,7 @@ const Login = () => {
                     draggable: true
                 });
             })
+        navigate(from, { replace: true })
     }
     const [disabled, setDisabled] = useState(true)
     useEffect(() => {

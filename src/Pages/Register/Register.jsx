@@ -3,21 +3,26 @@ import { useForm } from "react-hook-form"
 import { AuthContext } from "../../Provider/AuthProvider";
 
 import Swal from 'sweetalert2'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-    const { creatUser } = useContext(AuthContext)
+    const { creatUser, updateUser } = useContext(AuthContext)
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
+    const navigate = useNavigate()
     const onSubmit = (data) => {
         console.log(data);
         creatUser(data.email, data.password)
             .then(result => {
                 console.log("User created:", result.user);
-                Swal.fire("Account Create Succesfully!");
+                updateUser(data.name, data.PhotoUrl)
+                    .then(() => {
+                        Swal.fire("Account Create Succesfully!");
+                        navigate("/")
+                    })
             })
     };
 
@@ -39,6 +44,14 @@ const Register = () => {
                             </label>
                             <input type="Name" name="name"{...register("name", { required: true })} placeholder="Name" className="input input-bordered" required />
                             {errors.name && <span>Name field is required</span>}
+
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">PhotoUrl</span>
+                            </label>
+                            <input type="url"{...register("PhotoUrl", { required: true })} placeholder="PhotoURL" className="input input-bordered" required />
+                            {errors.PhotoUrl && <span>PhotoURL field is required</span>}
 
                         </div>
                         <div className="form-control">
