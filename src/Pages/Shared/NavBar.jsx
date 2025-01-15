@@ -26,7 +26,7 @@ const NavBar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/menu'}>Menu</NavLink></li>
         <li><NavLink to={'/order/pizza'}>Order</NavLink></li>
-        <li><NavLink to={'/'} className="btn">
+        <li><NavLink to={'/dashboard/cart'} className="btn">
             <FaCartPlus />
 
             <div className="badge badge-neutral">+{cart.length}</div>
