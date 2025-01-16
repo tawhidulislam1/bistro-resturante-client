@@ -4,9 +4,11 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 import Swal from 'sweetalert2'
 import { Link, useNavigate } from "react-router-dom";
+import useAxosPublic from "../../Hooks/useAxosPublic";
 
 const Register = () => {
     const { creatUser, updateUser } = useContext(AuthContext)
+    const axiosPublic = useAxosPublic()
     const {
         register,
         handleSubmit,
@@ -17,13 +19,28 @@ const Register = () => {
         console.log(data);
         creatUser(data.email, data.password)
             .then(result => {
-                console.log("User created:", result.user);
+                console.log(result);
                 updateUser(data.name, data.PhotoUrl)
                     .then(() => {
-                        Swal.fire("Account Create Succesfully!");
-                        navigate("/")
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                        }
+                        axiosPublic.post("/user", userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    Swal.fire("Account Create Succesfully!");
+                                    navigate("/")
+                                }
+                            })
+
                     })
             })
+            .catch((error) => {
+                const errorMessage = error.message;
+                Swal.fire(errorMessage);
+            });
+
     };
 
     return (
