@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from 'sweetalert2'
 import { Link, useNavigate } from "react-router-dom";
 import useAxosPublic from "../../Hooks/useAxosPublic";
+import SocailLogin from "../../Componentes/SocialLogin/SocailLogin";
 
 const Register = () => {
     const { creatUser, updateUser } = useContext(AuthContext)
@@ -98,6 +99,7 @@ const Register = () => {
                         </div>
                     </form>
                     <p><small>Have you have account<Link className='link' to={"/login"}>Login!</Link></small></p>
+                    <SocailLogin></SocailLogin>
                 </div>
             </div>
         </div>
