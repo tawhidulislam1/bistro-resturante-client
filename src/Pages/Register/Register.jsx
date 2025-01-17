@@ -30,7 +30,7 @@ const Register = () => {
                         axiosPublic.post("/user", userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    Swal.fire("Account Create Succesfully!");
+                                    Swal.fire("Login Succesfully!");
                                     navigate("/")
                                 }
                             })

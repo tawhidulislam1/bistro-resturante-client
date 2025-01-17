@@ -3,12 +3,14 @@ import { createContext, useEffect, useState } from "react";
 
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from "../Firebase/Firebase.init";
+import useAxosPublic from "../Hooks/useAxosPublic";
 
 const auth = getAuth(app);
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
+    const axiosPublic = useAxosPublic()
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -36,6 +38,18 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
+            if (currentUser) {
+                const email = currentUser.email;
+                axiosPublic.post('/jwt', email)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem("access-token", res.data.token)
+                        }
+                    })
+            }
+            else {
+                localStorage.removeItem("access-token")
+            }
             setLoading(false)
             console.log("current user ", currentUser);
         })
