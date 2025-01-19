@@ -8,9 +8,12 @@ import Order from "../Pages/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import Cart from "../Pages/Dashboard/Cart/Cart";
 import AllUser from "../Pages/Dashboard/AllUser/AllUser";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
+import ManageItem from "../Pages/Dashboard/ManageItem/ManageItem";
 
 export const router = createBrowserRouter([
     {
@@ -50,8 +53,18 @@ export const router = createBrowserRouter([
 
             //admin route
             {
+                path: 'addItems',
+                element: <AdminRoute><AddItem></AddItem></AdminRoute>
+
+            },
+            {
+                path: 'manageItems',
+                element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
+
+            },
+            {
                 path: "users",
-                element: <AllUser></AllUser>
+                element: <AdminRoute><AllUser></AllUser></AdminRoute>
             },
 
         ]

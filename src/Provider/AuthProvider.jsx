@@ -52,14 +52,15 @@ const AuthProvider = ({ children }) => {
 
             }
             else {
-                localStorage.removeItem("access-token")
-                setLoading(false)
+                localStorage.removeItem("access-token");
+                setUser(null);
+                setLoading(false);
             }
 
             console.log("current user ", currentUser);
         })
         return () => {
-            return unsubcribe
+            return () => unsubcribe();
         }
     }, [axiosPublic])
     const AuthInfo = {
