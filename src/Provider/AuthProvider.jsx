@@ -37,30 +37,39 @@ const AuthProvider = ({ children }) => {
     }
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
+
             if (currentUser) {
                 const email = currentUser.email;
-                axiosPublic.post('/jwt', email)
+                console.log('email', email);
+                axiosPublic.post('/jwt', { email })
                     .then(res => {
                         if (res.data.token) {
+                            setUser(currentUser);
                             localStorage.setItem("access-token", res.data.token)
+                            setLoading(false)
                         }
                     })
+
             }
             else {
                 localStorage.removeItem("access-token")
+                setLoading(false)
             }
-            setLoading(false)
+
             console.log("current user ", currentUser);
         })
         return () => {
             return unsubcribe
         }
-    }, [])
+    }, [axiosPublic])
     const AuthInfo = {
         user,
         loading,
-        creatUser, signIn, logOut, updateUser, googleLogin,
+        creatUser,
+        signIn,
+        logOut,
+        updateUser,
+        googleLogin,
 
     }
     return (

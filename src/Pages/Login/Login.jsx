@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocailLogin from '../../Componentes/SocialLogin/SocailLogin';
 const Login = () => {
     const { signIn } = useContext(AuthContext)
     const location = useLocation()
@@ -78,6 +79,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p><small>New Here? <Link className='link' to={"/register"}>Create An Account!</Link></small></p>
+                    <SocailLogin></SocailLogin>
                 </div>
             </div>
         </div>
