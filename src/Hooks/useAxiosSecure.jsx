@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
+// eslint-disable-next-line react-refresh/only-export-components
 const AxiosSecure = axios.create({
     baseURL: "http://localhost:5000",
 })
 
 const useAxiosSecure = () => {
-    const {logOut} = useContext(AuthContext)
+    const { logOut } = useContext(AuthContext)
     const navigate = useNavigate()
     // request interceptor to add authorization header for every secure call to teh api
     AxiosSecure.interceptors.request.use(function (config) {
