@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const AxiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://bistro-boss-serve-ten.vercel.app",
 })
 
 const useAxiosSecure = () => {
