@@ -4,9 +4,11 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaCartPlus } from "react-icons/fa";
 import useCarts from "../../Hooks/useCarts";
+import useAdmin from "../../Hooks/useAdmin";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin()
     const [cart] = useCarts()
     console.log(cart);
     const handleLogout = () => {
@@ -26,15 +28,21 @@ const NavBar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/menu'}>Menu</NavLink></li>
         <li><NavLink to={'/order/pizza'}>Order</NavLink></li>
-        <li><NavLink to={'/dashboard/cart'} className="btn">
-            <FaCartPlus />
+        {/* <li>
+            <NavLink to={'/dashboard/cart'} className="btn">
+                <FaCartPlus /> <div className="badge badge-neutral">+{cart.length}</div>
+            </NavLink>
+        </li> */}
+        <li>
+            {
+                user && isAdmin && <NavLink to={'/dashboard/adminHome'}>Dashboard</NavLink>
+            }
+            {
+                user && !isAdmin && <NavLink to={'/dashboard/userHome'}>Dashboard</NavLink>
+            }
+        </li>
 
-            <div className="badge badge-neutral">+{cart.length}</div>
 
-        </NavLink></li>
-        {
-            user ? <><button className="bn" onClick={handleLogout}>Logout</button></> : <><li><NavLink to={'/login'}>Login</NavLink></li></>
-        }
 
 
     </>
@@ -71,7 +79,13 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+
+                    {
+                        user ? <><button className="btn" onClick={handleLogout}>Logout</button></> : <><li><NavLink to={'/login'}>Login</NavLink></li></>
+                    }
+                    <NavLink to={'/dashboard/cart'} className="btn">
+                        <FaCartPlus /> <div className="badge badge-neutral">+{cart.length}</div>
+                    </NavLink>
                 </div>
             </div>
         </nav>
