@@ -22,7 +22,7 @@ const DashboardLayout = () => {
                             <>
                                 <li><NavLink to={'/dashboard/userHome'}><FaHome></FaHome> User Home</NavLink></li>
                                 <li><NavLink to={'/dashboard/revulation'}><FaCalendar></FaCalendar> revulation</NavLink></li>
-                                <li><NavLink to={'/dashboard/revulation'}><FaPaypal></FaPaypal> Payment history</NavLink></li>
+                                <li><NavLink to={'/dashboard/paymentHistory'}><FaPaypal></FaPaypal> Payment history</NavLink></li>
                                 <li><NavLink to={'/dashboard/cart'}><FaShoppingCart></FaShoppingCart> Cart</NavLink></li>
                                 <li><NavLink to={'/dashboard/review'}><FaAd></FaAd> Add a Review</NavLink></li>
                                 <li><NavLink to={'/dashboard/bookings'}><FaBookBookmark></FaBookBookmark> My Bookings</NavLink></li>

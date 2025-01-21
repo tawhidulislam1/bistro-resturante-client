@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useCarts from "../../../Hooks/useCarts";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
     const stripe = useStripe();
@@ -15,6 +16,7 @@ const CheckoutForm = () => {
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
     const [clientSecret, setClientSecret] = useState('')
     const [paymentId, setPaymentId] = useState(null)
+    const navigate = useNavigate()
     // Debug cart and total price
     console.log("Cart data:", cart);
     console.log("Total price:", totalPrice);
@@ -68,9 +70,11 @@ const CheckoutForm = () => {
                     name: user.displayName,
                     email: user?.email,
                     transactionId: paymentId,
+                    price: totalPrice,
                     date: new Date(),
                     cardIds: cart.map(item => item._id),
-                    menuIds: cart.map(item => item.menuID)
+                    menuIds: cart.map(item => item.menuID),
+                    status: 'pending',
                 }
                 axiosSecure.post('/payment', paymentInfo)
                     .then(res => {
@@ -86,6 +90,7 @@ const CheckoutForm = () => {
                             });
                         }
                     })
+                navigate("/dashboard/paymentHistory")
             }
         }
     }
