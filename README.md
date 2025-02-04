@@ -21,7 +21,7 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository**  
    ```sh
-   git clone [<repository-url>](https://github.com/tawhidulislam1/bistro-resturante-client.git)
+   git clone https://github.com/tawhidulislam1/bistro-resturante-client.git
    cd <project-folder>
    ```  
 2. **Install dependencies**  
@@ -68,17 +68,6 @@ To set up the project locally, follow these steps:
 ### Utilities  
 - `prop-types`, `react-helmet-async`, `react-hook-form`, `sweetalert2`  
 
-## Configuration  
-- Set up a `.env` file in the root directory with the following variables:  
-  ```sh
-  VITE_FIREBASE_API_KEY=<your-firebase-api-key>
-  VITE_FIREBASE_AUTH_DOMAIN=<your-auth-domain>
-  VITE_FIREBASE_PROJECT_ID=<your-project-id>
-  VITE_FIREBASE_STORAGE_BUCKET=<your-storage-bucket>
-  VITE_FIREBASE_MESSAGING_SENDER_ID=<your-messaging-sender-id>
-  VITE_FIREBASE_APP_ID=<your-app-id>
-  VITE_STRIPE_PUBLIC_KEY=<your-stripe-public-key>
-  ```  
 
 ## Development Tools  
 - **Vite** as the build tool.  
@@ -95,7 +84,7 @@ To set up the project locally, follow these steps:
 - If ESLint throws errors, ensure the configurations match your project requirements.  
 
 ## Contributors  
-- [Tawhidul Islam] - Developer  
+- Tawhidul Islam - Developer  
 - Contributions welcome! Please submit a pull request.  
 
 ## License  
